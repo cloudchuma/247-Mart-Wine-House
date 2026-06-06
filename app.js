@@ -244,3 +244,103 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
 
         const name = document.getElementById("cust-name")?.value || "Customer";
+        const phone = document.getElementById("cust-phone")?.value || "Not Provided";
+        const zoneSelect = document.getElementById("delivery-zone");
+        const selectedZoneName = zoneSelect ? zoneSelect.options[zoneSelect.selectedIndex].text : "Azikiwe Road Center";
+        const address = document.getElementById("cust-address")?.value || "Pick Up At Store";
+
+        if (cart.length === 0) {
+            alert("Your cart is empty!");
+            return;
+        }
+
+        let message = `*🔔 NEW 24/7 SHOPPING ORDER* \n\n`;
+        message += `*Customer Details:* \n`;
+        message += `👤 Name: ${name}\n`;
+        message += `📞 Phone: ${phone}\n`;
+        message += `📍 Zone Area: ${selectedZoneName}\n`;
+        message += `🏠 Landmark Address: ${address}\n\n`;
+        message += `*Items Ordered:* \n`;
+
+        let subtotal = 0;
+        cart.forEach(item => {
+            message += `- ${item.quantity}x ${item.name} (${fmt(item.price * item.quantity)})\n`;
+            subtotal += item.price * item.quantity;
+        });
+
+        let finalGrandTotal = subtotal;
+        if (localStorage.getItem("userPromoDiscountApplied") === "true") {
+            const deductionAmount = subtotal * 0.05;
+            finalGrandTotal = subtotal - deductionAmount;
+            message += `\n🎁 Slogan Discount Applied: -${fmt(deductionAmount)} (5% Off)\n`;
+        }
+
+        message += `💰 *Grand Total Bill: ${fmt(finalGrandTotal)}* \n\n`;
+        message += `Slogan check: "Buy more, pay less..."\n`;
+        message += `Please confirm availability and dispatch your closest rider from Azikiwe Road!`;
+
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappUrl = `https://wa.me{BUSINESS_PHONE}?text=${encodedMessage}`;
+
+        window.open(whatsappUrl, '_blank');
+
+        // Fire native canvas confetti logic routines
+        fireConfetti();
+
+        // Reset local workspace states
+        cart = [];
+        checkoutForm.reset();
+        updateCartUI();
+        closeCart();
+    });
+
+    /* ---------- Confetti + checkmark success ---------- */
+    function fireConfetti() {
+        if (!confettiCanvas) return;
+        const ctx = confettiCanvas.getContext("2d");
+        const dpr = window.devicePixelRatio || 1;
+        const W = confettiCanvas.clientWidth = window.innerWidth;
+        const H = confettiCanvas.clientHeight = window.innerHeight;
+        confettiCanvas.width = W * dpr;
+        confettiCanvas.height = H * dpr;
+        ctx.scale(dpr, dpr);
+
+        const colors = ["#d4af37", "#f3cf55", "#25d366", "#ffffff", "#a8861f", "#4ade80"];
+        const pieces = Array.from({ length: 140 }, () => ({
+            x: W / 2 + (Math.random() - 0.5) * 80,
+            y: H / 2 + (Math.random() - 0.5) * 40,
+            vx: (Math.random() - 0.5) * 12,
+            vy: Math.random() * -14 - 4,
+            g: 0.35 + Math.random() * 0.2,
+            size: 6 + Math.random() * 6,
+            rot: Math.random() * Math.PI,
+            vr: (Math.random() - 0.5) * 0.3,
+        }));
+
+        let animationFrameId;
+        const updateConfetti = () => {
+            ctx.clearRect(0, 0, W, H);
+            let active = false;
+            pieces.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += p.g;
+                p.rot += p.vr;
+                if (p.y < H + 20) active = true;
+
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.rot);
+                ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
+                ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+                ctx.restore();
+            });
+            if (active) {
+                animationFrameId = requestAnimationFrame(updateConfetti);
+            } else {
+                cancelAnimationFrame(animationFrameId);
+            }
+        };
+        updateConfetti();
+    }
+});
