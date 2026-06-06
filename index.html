@@ -29,7 +29,7 @@
     <div id="age-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="age-title">
         <div class="modal-box">
             <i class="fa-solid fa-wine-glass luxury-icon" aria-hidden="true"></i>
-            <h2 id="age-title">Welcome to <span class="gold-text">24/7 Wine &amp; Mart</span></h2>
+            <h2 id="age-title">Welcome to <span class="gold-text">24/7 Mart &amp; Wine</span></h2>
             <p>You must be 18 years or older to enter and order alcohol in Nigeria.</p>
             <div class="modal-buttons">
                 <button id="btn-enter" class="btn-primary">I am 18 or Older</button>
@@ -38,6 +38,28 @@
             <small class="modal-fineprint">Please drink responsibly.</small>
         </div>
     </div>
+
+        <!-- 1B. WELCOME BONUS MODAL -->
+        <div id="bonus-modal" class="modal-overlay" style="display: none;">
+            <div class="modal-box premium-border">
+                <div class="modal-badge">Special Gift</div>
+                <i class="fa-solid fa-gift luxury-icon"></i>
+                <h2>WELCOME BONUS!</h2>
+                <p class="slogan-text">"Buy more, pay less..."</p>
+                <p>Enter your email or phone number to unlock a <span class="gold-text">5% discount</span> on your first 24/7
+                    purchase!</p>
+        
+                <form id="bonus-form" class="bonus-form-layout">
+                    <input type="email" id="bonus-email" placeholder="Enter Your Email Address" required>
+                    <button type="submit" class="btn-primary full-width-btn">Get 5% Discount</button>
+                </form>
+        
+                <p class="terms-text">By signing up, you agree to receive marketing updates. View our privacy policy and terms
+                    of service for more info.</p>
+                <button id="btn-close-bonus" class="text-close-btn">No thanks, I'll pay full price</button>
+            </div>
+        </div>
+
 
     <!-- 2. NAVIGATION BAR -->
     <nav class="navbar" id="navbar">

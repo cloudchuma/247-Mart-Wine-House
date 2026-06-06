@@ -17,33 +17,78 @@ document.addEventListener("DOMContentLoaded", () => {
     const orderSuccess = document.getElementById("order-success");
     const confettiCanvas = document.getElementById("confetti-canvas");
 
+    // NEW DOM ELEMENTS FOR WELCOME POPOVER
+    const bonusModal = document.getElementById("bonus-modal");
+    const bonusForm = document.getElementById("bonus-form");
+    const btnCloseBonus = document.getElementById("btn-close-bonus");
+
     // ⚠️ Replace with your real WhatsApp business number (international, no +).
     const BUSINESS_PHONE = "2348000000000";
 
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    /* ---------- Age verification ---------- */
+    /* ---------- Age verification & Welcome Bonus Sequence ---------- */
+    const triggerBonusPopupDelayed = () => {
+        if (localStorage.getItem("bonusClaimedOrDismissed") !== "true") {
+            setTimeout(() => {
+                if (bonusModal) {
+                    bonusModal.style.display = "flex";
+                    bonusModal.style.opacity = "1";
+                    document.body.style.overflow = "hidden";
+                }
+            }, 1500); // Trigger 1.5 seconds after passing the age gate
+        }
+    };
+
+    const dismissBonus = () => {
+        localStorage.setItem("bonusClaimedOrDismissed", "true");
+        if (bonusModal) {
+            bonusModal.style.opacity = "0";
+            document.body.style.overflow = "";
+            setTimeout(() => { bonusModal.style.display = "none"; }, 360);
+        }
+    };
+
     if (ageModal) {
         if (localStorage.getItem("ageVerified") === "true") {
             ageModal.style.display = "none";
+            triggerBonusPopupDelayed();
         } else {
             document.body.style.overflow = "hidden";
         }
+
         const closeAgeModal = () => {
             ageModal.style.transition = "opacity 0.35s ease";
             ageModal.style.opacity = "0";
             document.body.style.overflow = "";
-            setTimeout(() => { ageModal.style.display = "none"; }, 360);
+            setTimeout(() => {
+                ageModal.style.display = "none";
+                triggerBonusPopupDelayed();
+            }, 360);
         };
+
         btnEnter?.addEventListener("click", () => {
             localStorage.setItem("ageVerified", "true");
             closeAgeModal();
         });
+
         btnLeave?.addEventListener("click", () => {
             alert("You must be 18 or older to view this site.");
             window.location.href = "https://google.com";
         });
     }
+
+    /* ---------- Welcome Bonus Interactive Inputs ---------- */
+    btnCloseBonus?.addEventListener("click", dismissBonus);
+
+    bonusForm?.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const emailCaptured = document.getElementById("bonus-email")?.value;
+        alert(`🎁 Promo Code [BUYMORE5] applied! 5% discount unlocked for ${emailCaptured}.`);
+        localStorage.setItem("userPromoDiscountApplied", "true");
+        dismissBonus();
+        updateCartUI(); // Instant update to check for items already in cart
+    });
 
     /* ---------- Navbar scroll state ---------- */
     if (navbar) {
@@ -115,10 +160,10 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        let total = 0, count = 0;
+        let subtotal = 0, count = 0;
         cart.forEach(item => {
             const line = item.price * item.quantity;
-            total += line;
+            subtotal += line;
             count += item.quantity;
 
             const row = document.createElement("div");
@@ -137,7 +182,20 @@ document.addEventListener("DOMContentLoaded", () => {
             cartItemsContainer.appendChild(row);
         });
 
-        cartTotalPrice.textContent = fmt(total);
+        // Compute 5% promotional reductions dynamically if subscriber gate clears
+        let finalGrandTotal = subtotal;
+        if (localStorage.getItem("userPromoDiscountApplied") === "true") {
+            const deductionAmount = subtotal * 0.05;
+            finalGrandTotal = subtotal - deductionAmount;
+
+            // Render an itemized deduction break notice to the sidebar total summary matrix
+            const discountRow = document.createElement("div");
+            discountRow.className = "cart-discount-notice";
+            discountRow.innerHTML = `<p style="color: #4ade80; font-size: 0.85rem; text-align: right; margin-bottom: 5px;">Promo Code Applied: -${fmt(deductionAmount)} (5% Off)</p>`;
+            cartItemsContainer.appendChild(discountRow);
+        }
+
+        cartTotalPrice.textContent = fmt(finalGrandTotal);
         cartCount.textContent = String(count);
         bumpCart();
     }
@@ -181,107 +239,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    /* ---------- Confetti + checkmark success ---------- */
-    function fireConfetti() {
-        const ctx = confettiCanvas.getContext("2d");
-        const dpr = window.devicePixelRatio || 1;
-        const W = confettiCanvas.clientWidth = window.innerWidth;
-        const H = confettiCanvas.clientHeight = window.innerHeight;
-        confettiCanvas.width = W * dpr;
-        confettiCanvas.height = H * dpr;
-        ctx.scale(dpr, dpr);
-
-        const colors = ["#d4af37", "#f3cf55", "#25d366", "#ffffff", "#a8861f", "#4ade80"];
-        const pieces = Array.from({ length: 140 }, () => ({
-            x: W / 2 + (Math.random() - 0.5) * 80,
-            y: H / 2 + (Math.random() - 0.5) * 40,
-            vx: (Math.random() - 0.5) * 12,
-            vy: Math.random() * -14 - 4,
-            g: 0.35 + Math.random() * 0.2,
-            size: 6 + Math.random() * 6,
-            rot: Math.random() * Math.PI,
-            vr: (Math.random() - 0.5) * 0.3,
-            color: colors[Math.floor(Math.random() * colors.length)],
-            life: 0
-        }));
-
-        let raf;
-        const start = performance.now();
-        function tick(now) {
-            const t = now - start;
-            ctx.clearRect(0, 0, W, H);
-            pieces.forEach(p => {
-                p.vy += p.g;
-                p.x += p.vx;
-                p.y += p.vy;
-                p.rot += p.vr;
-                p.life = t;
-                ctx.save();
-                ctx.translate(p.x, p.y);
-                ctx.rotate(p.rot);
-                ctx.fillStyle = p.color;
-                ctx.globalAlpha = Math.max(0, 1 - t / 2400);
-                ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.4);
-                ctx.restore();
-            });
-            if (t < 2400) raf = requestAnimationFrame(tick);
-            else ctx.clearRect(0, 0, W, H);
-        }
-        raf = requestAnimationFrame(tick);
-    }
-
-    function showSuccess() {
-        orderSuccess.classList.add("active");
-        orderSuccess.setAttribute("aria-hidden", "false");
-        fireConfetti();
-        setTimeout(() => {
-            orderSuccess.classList.remove("active");
-            orderSuccess.setAttribute("aria-hidden", "true");
-        }, 2200);
-    }
-
-    /* ---------- Checkout → WhatsApp ---------- */
-    checkoutForm.addEventListener("submit", (e) => {
+    /* ---------- Checkout Form Submission to WhatsApp ---------- */
+    checkoutForm?.addEventListener("submit", (e) => {
         e.preventDefault();
-        if (cart.length === 0) { alert("Your cart is empty!"); return; }
 
-        const name = document.getElementById("cust-name").value.trim();
-        const phone = document.getElementById("cust-phone").value.trim();
-        const address = document.getElementById("cust-address").value.trim();
-        if (!name || !phone || !address) {
-            alert("Please fill in your name, phone and delivery address.");
-            return;
-        }
-
-        let total = 0;
-        let lines = "";
-        cart.forEach(item => {
-            const sub = item.price * item.quantity;
-            total += sub;
-            lines += `• ${item.quantity}× ${item.name} — ${fmt(sub)}\n`;
-        });
-
-        const message =
-            `*🔔 NEW 24/7 WINE & MART ORDER*\n\n` +
-            `*Customer*\n` +
-            `👤 ${name}\n` +
-            `📞 ${phone}\n` +
-            `📍 ${address}\n\n` +
-            `*Items*\n${lines}\n` +
-            `💰 *Total: ${fmt(total)}*\n\n` +
-            `Please confirm availability and dispatch the closest rider from Azikiwe Road. Thank you!`;
-
-        const url = `https://wa.me/${BUSINESS_PHONE}?text=${encodeURIComponent(message)}`;
-
-        showSuccess();
-        // small delay so the user sees the confetti before the tab switches
-        setTimeout(() => { window.open(url, "_blank"); }, 700);
-
-        cart = [];
-        checkoutForm.reset();
-        updateCartUI();
-        setTimeout(closeCart, 1600);
-    });
-
-    updateCartUI();
-});
+        const name = document.getElementById("cust-name")?.value || "Customer";

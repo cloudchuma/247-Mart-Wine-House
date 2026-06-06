@@ -1209,3 +1209,74 @@ a {
         transition: opacity 0.2s linear, transform 0.2s linear !important;
     }
 }
+
+/* Welcome Bonus Premium Styling Additions */
+.premium-border {
+    border: 1px solid var(--gold) !important;
+    position: relative;
+}
+
+.modal-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: #000;
+    padding: 4px 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 20px;
+}
+
+.slogan-text {
+    font-style: italic;
+    color: var(--gold) !important;
+    margin-top: -10px;
+    margin-bottom: 15px !important;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+}
+
+.bonus-form-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.bonus-form-layout input {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #fff;
+    padding: 14px;
+    border-radius: 6px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.full-width-btn {
+    width: 100%;
+    padding: 14px !important;
+}
+
+.terms-text {
+    font-size: 0.75rem !important;
+    color: #666 !important;
+    line-height: 1.4;
+    margin-bottom: 15px !important;
+}
+
+.text-close-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.text-close-btn:hover {
+    color: #fff;
+}
