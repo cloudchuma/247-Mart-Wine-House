@@ -39,27 +39,24 @@
         </div>
     </div>
 
-        <!-- 1B. WELCOME BONUS MODAL -->
-        <div id="bonus-modal" class="modal-overlay" style="display: none;">
-            <div class="modal-box premium-border">
-                <div class="modal-badge">Special Gift</div>
-                <i class="fa-solid fa-gift luxury-icon"></i>
-                <h2>WELCOME BONUS!</h2>
-                <p class="slogan-text">"Buy more, pay less..."</p>
-                <p>Enter your email or phone number to unlock a <span class="gold-text">5% discount</span> on your first 24/7
-                    purchase!</p>
-        
-                <form id="bonus-form" class="bonus-form-layout">
-                    <input type="email" id="bonus-email" placeholder="Enter Your Email Address" required>
-                    <button type="submit" class="btn-primary full-width-btn">Get 5% Discount</button>
-                </form>
-        
-                <p class="terms-text">By signing up, you agree to receive marketing updates. View our privacy policy and terms
-                    of service for more info.</p>
-                <button id="btn-close-bonus" class="text-close-btn">No thanks, I'll pay full price</button>
-            </div>
-        </div>
+    <!-- 1B. WELCOME BONUS MODAL -->
+    <div id="bonus-modal" class="modal-overlay" style="display: none;" role="dialog" aria-modal="true">
+        <div class="modal-box premium-border">
+            <div class="modal-badge">Special Gift</div>
+            <i class="fa-solid fa-gift luxury-icon"></i>
+            <h2>WELCOME BONUS!</h2>
+            <p class="slogan-text">"Buy more, pay less..."</p>
+            <p>Enter your email to unlock a <span class="gold-text">5% discount</span> on your first 24/7 purchase!</p>
 
+            <form id="bonus-form" class="bonus-form-layout">
+                <input type="email" id="bonus-email" placeholder="Enter Your Email Address" required>
+                <button type="submit" class="btn-primary full-width-btn">Get 5% Discount</button>
+            </form>
+
+            <p class="terms-text">By signing up, you agree to receive marketing updates. View our privacy policy and terms of service for more info.</p>
+            <button id="btn-close-bonus" class="text-close-btn">No thanks, I'll pay full price</button>
+        </div>
+    </div>
 
     <!-- 2. NAVIGATION BAR -->
     <nav class="navbar" id="navbar">
@@ -123,9 +120,40 @@
             <p class="section-sub">A taste of what's in stock tonight.</p>
         </div>
 
-        <div class="product-grid">
-            <article class="product-card">
-                <div class="product-media product-media-1"><i class="fa-solid fa-wine-bottle"></i></div>
+        <!-- 5A. LUXURY SEARCH BAR -->
+        <div class="search-wrap">
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
+                <input
+                    type="search"
+                    id="product-search"
+                    class="search-input"
+                    placeholder="Search Hennessy, Moët, Heineken…"
+                    autocomplete="off"
+                    aria-label="Search products"
+                >
+                <button type="button" id="search-clear" class="search-clear" aria-label="Clear search" hidden>
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 5B. CATEGORY FILTER TABS -->
+        <nav class="categories" id="category-tabs" aria-label="Filter by category">
+            <button class="tab-btn active" data-category="all" type="button">All</button>
+            <button class="tab-btn" data-category="wine" type="button">Wine</button>
+            <button class="tab-btn" data-category="spirits" type="button">Spirits</button>
+            <button class="tab-btn" data-category="champagne" type="button">Champagne</button>
+            <button class="tab-btn" data-category="beer" type="button">Beer</button>
+            <button class="tab-btn" data-category="mart" type="button">Mart</button>
+            <button class="tab-btn" data-category="mixers" type="button">Mixers</button>
+        </nav>
+
+        <div class="product-grid" id="product-grid">
+            <article class="product-card" data-category="wine" data-name="Chateau Reserve Red Wine">
+                <div class="product-media">
+                    <img src="https://project--9d0b1b88-5a39-477e-b777-5a3db95677fd.lovable.app/__l5e/assets-v1/a35bd415-ce6f-4133-a426-7eccc4731604/wine1.jpg" alt="Chateau Reserve red wine bottle" loading="lazy" width="1024" height="768">
+                </div>
                 <div class="product-body">
                     <span class="product-tag">Red Wine</span>
                     <h3>Chateau Reserve</h3>
@@ -134,8 +162,10 @@
                 </div>
             </article>
 
-            <article class="product-card">
-                <div class="product-media product-media-2"><i class="fa-solid fa-martini-glass-citrus"></i></div>
+            <article class="product-card" data-category="spirits" data-name="Hennessy VS Cognac Spirits">
+                <div class="product-media">
+                    <img src="https://project--9d0b1b88-5a39-477e-b777-5a3db95677fd.lovable.app/__l5e/assets-v1/fcafba59-946d-49b4-850b-0042dfdd7398/wine2.jpg" alt="Hennessy VS cognac bottle" loading="lazy" width="1024" height="768">
+                </div>
                 <div class="product-body">
                     <span class="product-tag">Spirits</span>
                     <h3>Hennessy VS</h3>
@@ -144,8 +174,10 @@
                 </div>
             </article>
 
-            <article class="product-card">
-                <div class="product-media product-media-3"><i class="fa-solid fa-champagne-glasses"></i></div>
+            <article class="product-card" data-category="champagne" data-name="Moet Chandon Champagne">
+                <div class="product-media">
+                    <img src="https://project--9d0b1b88-5a39-477e-b777-5a3db95677fd.lovable.app/__l5e/assets-v1/a82f6ed4-7d99-427a-83ba-f1bafabddb29/wine3.jpg" alt="Moët and Chandon champagne bottle" loading="lazy" width="1024" height="768">
+                </div>
                 <div class="product-body">
                     <span class="product-tag">Champagne</span>
                     <h3>Moët &amp; Chandon</h3>
@@ -154,8 +186,10 @@
                 </div>
             </article>
 
-            <article class="product-card">
-                <div class="product-media product-media-4"><i class="fa-solid fa-beer-mug-empty"></i></div>
+            <article class="product-card" data-category="beer" data-name="Heineken Beer 12 Pack">
+                <div class="product-media">
+                    <img src="https://project--9d0b1b88-5a39-477e-b777-5a3db95677fd.lovable.app/__l5e/assets-v1/f3e589ee-c380-41d6-ad4a-5772742f887d/wine4.jpg" alt="Heineken 12 pack of beer bottles" loading="lazy" width="1024" height="768">
+                </div>
                 <div class="product-body">
                     <span class="product-tag">Beer Pack</span>
                     <h3>Heineken · 12 Pack</h3>
@@ -164,8 +198,10 @@
                 </div>
             </article>
 
-            <article class="product-card">
-                <div class="product-media product-media-5"><i class="fa-solid fa-mug-hot"></i></div>
+            <article class="product-card" data-category="mart" data-name="Midnight Snack Box Mart Groceries">
+                <div class="product-media">
+                    <img src="https://project--9d0b1b88-5a39-477e-b777-5a3db95677fd.lovable.app/__l5e/assets-v1/93cc4df9-fd7b-4507-aa54-6a2f27af3d6a/wine5.jpg" alt="Midnight snack box with chocolates, nuts and crackers" loading="lazy" width="1024" height="768">
+                </div>
                 <div class="product-body">
                     <span class="product-tag">Mart</span>
                     <h3>Midnight Snack Box</h3>
@@ -174,8 +210,10 @@
                 </div>
             </article>
 
-            <article class="product-card">
-                <div class="product-media product-media-6"><i class="fa-solid fa-bottle-water"></i></div>
+            <article class="product-card" data-category="mixers" data-name="Premium Mixer Pack Tonic Soda">
+                <div class="product-media">
+                    <img src="https://project--9d0b1b88-5a39-477e-b777-5a3db95677fd.lovable.app/__l5e/assets-v1/d1703fb0-1f99-4661-ab32-7690a023ed02/wine6.jpg" alt="Premium cocktail mixer pack with tonic and soda" loading="lazy" width="1024" height="768">
+                </div>
                 <div class="product-body">
                     <span class="product-tag">Mixers</span>
                     <h3>Premium Mixer Pack</h3>
@@ -184,6 +222,14 @@
                 </div>
             </article>
         </div>
+
+        <!-- 5C. EMPTY-STATE / NO RESULTS -->
+        <div id="no-results" class="no-results" hidden>
+            <i class="fa-solid fa-wine-glass-empty no-results-icon" aria-hidden="true"></i>
+            <h3>Item Not Found</h3>
+            <p>We couldn't find anything matching <span id="no-results-term" class="gold-text"></span>. Try a different word or chat us on WhatsApp — we probably stock it.</p>
+            <a href="https://wa.me" class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Ask on WhatsApp</a>
+        </div>
     </section>
 
     <!-- 6. FOOTER -->
@@ -191,7 +237,7 @@
         <div class="footer-inner">
             <div>
                 <div class="logo">24/7 <span class="gold-text">Wine&amp;Mart</span></div>
-                <p class="footer-tag">Premium drinks & groceries, delivered any time.</p>
+                <p class="footer-tag">Premium drinks &amp; groceries, delivered any time.</p>
             </div>
             <div class="footer-contact">
                 <a href="https://wa.me"><i class="fa-brands fa-whatsapp"></i> WhatsApp Us</a>
