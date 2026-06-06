@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0b0b0b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Premium 24/7 wine, spirits and grocery delivery on Azikiwe Road, Umuahia. Delivered to your door in 30 minutes.">
+
+    <meta property="og:title" content="Premium 24/7 Wine & Mart | Azikiwe Road, Umuahia">
+    <meta property="og:description" content="Premium drinks & groceries delivered any time — in 30 minutes.">
+    <meta property="og:type" content="website">
+
+    <title>Premium 24/7 Wine & Mart | Azikiwe Road, Umuahia</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- 1. AGE VERIFICATION MODAL -->
+    <div id="age-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="age-title">
+        <div class="modal-box">
+            <i class="fa-solid fa-wine-glass luxury-icon" aria-hidden="true"></i>
+            <h2 id="age-title">Welcome to <span class="gold-text">24/7 Wine &amp; Mart</span></h2>
+            <p>You must be 18 years or older to enter and order alcohol in Nigeria.</p>
+            <div class="modal-buttons">
+                <button id="btn-enter" class="btn-primary">I am 18 or Older</button>
+                <button id="btn-leave" class="btn-secondary">Exit</button>
+            </div>
+            <small class="modal-fineprint">Please drink responsibly.</small>
+        </div>
+    </div>
+
+    <!-- 2. NAVIGATION BAR -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="logo">24/7 <span class="gold-text">Wine&amp;Mart</span></a>
+        <div class="nav-status" aria-live="polite">
+            <span class="pulse-dot" aria-hidden="true"></span>
+            <span class="nav-status-text">Open · Delivering Now</span>
+            <span class="nav-status-short">Live</span>
+        </div>
+        <button class="cart-icon" id="cart-btn" aria-label="View cart">
+            <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
+            <span id="cart-count">0</span>
+        </button>
+    </nav>
+
+    <!-- 3. HERO SECTION -->
+    <header class="hero">
+        <div class="hero-bg" aria-hidden="true"></div>
+        <div class="hero-content">
+            <span class="location-tag"><i class="fa-solid fa-location-dot"></i> Azikiwe Road, Umuahia</span>
+            <h1>Premium Drinks &amp; Groceries, Delivered <span class="gold-text">Any Time.</span></h1>
+            <p>Skip the night stress. Order your favorite wines, spirits, and midnight snacks from your bed — delivered to your doorstep in 30 minutes.</p>
+            <div class="hero-cta">
+                <a href="#shop" class="btn-primary btn-lg">Browse Catalog</a>
+                <a href="https://wa.me" class="btn-whatsapp btn-lg"><i class="fa-brands fa-whatsapp"></i> Chat with Us</a>
+            </div>
+            <div class="hero-meta">
+                <span><i class="fa-solid fa-bolt"></i> 30-min delivery</span>
+                <span><i class="fa-solid fa-shield-halved"></i> 100% original stock</span>
+                <span><i class="fa-solid fa-moon"></i> Open all night</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 4. WHY CHOOSE US -->
+    <section class="features" aria-labelledby="features-title">
+        <h2 id="features-title" class="section-title">Why <span class="gold-text">Umuahia</span> Orders From Us</h2>
+        <div class="features-grid">
+            <article class="feature-card">
+                <i class="fa-solid fa-truck-fast feature-icon"></i>
+                <h3>30-Minute Delivery</h3>
+                <p>Fast riders covering Azikiwe Road and the wider Umuahia metro, day and night.</p>
+            </article>
+            <article class="feature-card">
+                <i class="fa-solid fa-certificate feature-icon"></i>
+                <h3>100% Original</h3>
+                <p>Every bottle sourced from verified distributors. Zero counterfeits — guaranteed.</p>
+            </article>
+            <article class="feature-card">
+                <i class="fa-solid fa-headset feature-icon"></i>
+                <h3>Real Humans, 24/7</h3>
+                <p>Chat us on WhatsApp anytime. Custom orders, gift wrapping, late-night runs — sorted.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- 5. FEATURED CATALOG -->
+    <section class="catalog" id="shop" aria-labelledby="catalog-title">
+        <div class="catalog-head">
+            <h2 id="catalog-title" class="section-title">Featured <span class="gold-text">Catalog</span></h2>
+            <p class="section-sub">A taste of what's in stock tonight.</p>
+        </div>
+
+        <div class="product-grid">
+            <article class="product-card">
+                <div class="product-media product-media-1"><i class="fa-solid fa-wine-bottle"></i></div>
+                <div class="product-body">
+                    <span class="product-tag">Red Wine</span>
+                    <h3>Chateau Reserve</h3>
+                    <p class="product-price">₦18,500</p>
+                    <button class="btn-primary btn-add" data-id="1" data-name="Chateau Reserve" data-price="18500">Add to Cart</button>
+                </div>
+            </article>
+
+            <article class="product-card">
+                <div class="product-media product-media-2"><i class="fa-solid fa-martini-glass-citrus"></i></div>
+                <div class="product-body">
+                    <span class="product-tag">Spirits</span>
+                    <h3>Hennessy VS</h3>
+                    <p class="product-price">₦62,000</p>
+                    <button class="btn-primary btn-add" data-id="2" data-name="Hennessy VS" data-price="62000">Add to Cart</button>
+                </div>
+            </article>
+
+            <article class="product-card">
+                <div class="product-media product-media-3"><i class="fa-solid fa-champagne-glasses"></i></div>
+                <div class="product-body">
+                    <span class="product-tag">Champagne</span>
+                    <h3>Moët &amp; Chandon</h3>
+                    <p class="product-price">₦95,000</p>
+                    <button class="btn-primary btn-add" data-id="3" data-name="Moët & Chandon" data-price="95000">Add to Cart</button>
+                </div>
+            </article>
+
+            <article class="product-card">
+                <div class="product-media product-media-4"><i class="fa-solid fa-beer-mug-empty"></i></div>
+                <div class="product-body">
+                    <span class="product-tag">Beer Pack</span>
+                    <h3>Heineken · 12 Pack</h3>
+                    <p class="product-price">₦14,200</p>
+                    <button class="btn-primary btn-add" data-id="4" data-name="Heineken 12 Pack" data-price="14200">Add to Cart</button>
+                </div>
+            </article>
+
+            <article class="product-card">
+                <div class="product-media product-media-5"><i class="fa-solid fa-mug-hot"></i></div>
+                <div class="product-body">
+                    <span class="product-tag">Mart</span>
+                    <h3>Midnight Snack Box</h3>
+                    <p class="product-price">₦7,500</p>
+                    <button class="btn-primary btn-add" data-id="5" data-name="Midnight Snack Box" data-price="7500">Add to Cart</button>
+                </div>
+            </article>
+
+            <article class="product-card">
+                <div class="product-media product-media-6"><i class="fa-solid fa-bottle-water"></i></div>
+                <div class="product-body">
+                    <span class="product-tag">Mixers</span>
+                    <h3>Premium Mixer Pack</h3>
+                    <p class="product-price">₦5,800</p>
+                    <button class="btn-primary btn-add" data-id="6" data-name="Premium Mixer Pack" data-price="5800">Add to Cart</button>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- 6. FOOTER -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div>
+                <div class="logo">24/7 <span class="gold-text">Wine&amp;Mart</span></div>
+                <p class="footer-tag">Premium drinks & groceries, delivered any time.</p>
+            </div>
+            <div class="footer-contact">
+                <a href="https://wa.me"><i class="fa-brands fa-whatsapp"></i> WhatsApp Us</a>
+                <a href="tel:+234"><i class="fa-solid fa-phone"></i> Call the Shop</a>
+                <span><i class="fa-solid fa-location-dot"></i> Azikiwe Road, Umuahia</span>
+            </div>
+        </div>
+        <small class="footer-bottom">© <span id="year"></span> 24/7 Wine &amp; Mart. Drink responsibly. 18+ only.</small>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me" class="fab-whatsapp" aria-label="Chat on WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- 7. SLIDE-OUT SHOPPING CART SIDEBAR -->
+    <aside id="cart-sidebar" class="cart-sidebar" aria-label="Your shopping cart" aria-hidden="true">
+        <div class="cart-glow" aria-hidden="true"></div>
+        <div class="cart-header">
+            <div>
+                <span class="cart-eyebrow">Your Order</span>
+                <h3>24/7 <span class="gold-text">Wine&amp;Mart</span></h3>
+            </div>
+            <button id="close-cart" class="close-cart-btn" aria-label="Close cart">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div id="cart-items-container" class="cart-items-list">
+            <p class="empty-cart-msg">
+                <i class="fa-solid fa-wine-glass-empty empty-icon"></i>
+                Your cart is empty.<br>
+                <span>Let's add some premium bottles!</span>
+            </p>
+        </div>
+
+        <div class="cart-footer">
+            <div class="cart-total-row">
+                <span>Subtotal</span>
+                <span id="cart-total-price" class="gold-text">₦0</span>
+            </div>
+
+            <form id="checkout-form" class="checkout-form" novalidate>
+                <div class="input-field">
+                    <i class="fa-solid fa-user input-icon"></i>
+                    <input type="text" id="cust-name" placeholder="Your full name" autocomplete="name" required>
+                </div>
+                <div class="input-field">
+                    <i class="fa-solid fa-phone input-icon"></i>
+                    <input type="tel" id="cust-phone" placeholder="Phone number (e.g. 0801 234 5678)" autocomplete="tel" required>
+                </div>
+                <div class="input-field">
+                    <i class="fa-solid fa-location-dot input-icon textarea-icon"></i>
+                    <textarea id="cust-address" placeholder="Delivery address in Umuahia (e.g., Near Michael Okpara Square, GRA)" required></textarea>
+                </div>
+
+                <button type="submit" class="btn-checkout">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>Send Order to WhatsApp</span>
+                </button>
+            </form>
+        </div>
+    </aside>
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+    <!-- 8. SUCCESS POP-UP (confetti + checkmark) -->
+    <div id="order-success" class="order-success" aria-hidden="true">
+        <div class="success-card">
+            <div class="success-check">
+                <svg viewBox="0 0 52 52" aria-hidden="true">
+                    <circle class="check-circle" cx="26" cy="26" r="24" fill="none"/>
+                    <path class="check-mark" fill="none" d="M14 27 l8 8 l16 -18"/>
+                </svg>
+            </div>
+            <h4>Order Sent!</h4>
+            <p>Opening WhatsApp to confirm with our team…</p>
+        </div>
+        <canvas id="confetti-canvas" class="confetti-canvas" aria-hidden="true"></canvas>
+    </div>
+
+    <script src="app.js" defer></script>
+</body>
+
+</html>
